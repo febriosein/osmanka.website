@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website OSIS MPK SMA Al Azhar Syifa Budi Solo</title>
+    <!-- Impor Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Impor Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Impor ikon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Menggunakan font Inter sebagai default */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Style untuk dropdown */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            z-index: 10;
+        }
+
+        /* Animasi spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #16a34a;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animasi sederhana untuk hasil AI */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header dan Navigasi -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="https://placehold.co/50x50/16a34a/white?text=LOGO" alt="Logo SMA"
+                        class="h-12 w-12 rounded-full mr-3">
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">OSIS MPK SMASBeSt</h1>
+                        <p class="text-xs text-gray-500">Official Website</p>
+                    </div>
+                </div>
+
+                <!-- Navigasi Desktop -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#home"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Home</a>
+                    <a href="#tentang"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Tentang</a>
+                    <a href="#proker"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Proker
+                        Unggulan</a>
+                    <!-- Dropdown Divisi -->
+                    <div class="relative dropdown">
+                        <a href="#divisi"
+                            class="text-gray-600 hover:text-green-600 font-medium flex items-center transition duration-300">
+                            Divisi
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu bg-white rounded-md shadow-lg mt-2 w-48 py-1">
+                            <a href="#divisi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-100">Divisi
+                                1</a>
+                            <a href="#divisi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-100">Divisi
+                                2</a>
+                            <a href="#divisi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-100">Divisi
+                                3</a>
+                        </div>
+                    </div>
+                    <a href="#galeri"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Galeri</a>
+                    <a href="#alumni"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Alumni</a>
+                    <a href="#contact"
+                        class="text-gray-600 hover:text-green-600 font-medium transition duration-300">Contact</a>
+                </nav>
+
+                <!-- Tombol Menu Mobile -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-green-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigasi Mobile (tersembunyi secara default) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#home"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Home</a>
+                <a href="#tentang"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Tentang</a>
+                <a href="#proker"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Proker
+                    Unggulan</a>
+                <a href="#divisi"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Divisi</a>
+                <a href="#galeri"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Galeri</a>
+                <a href="#alumni"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Alumni</a>
+                <a href="#contact"
+                    class="mobile-nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-green-100 rounded">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bagian Hero -->
+    <main id="home">
+        <div class="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-white">
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: url('https://placehold.co/1920x1080/cccccc/ffffff?text=Gedung+Sekolah');">
+            </div>
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="relative z-10 text-center px-4">
+                <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-wider">Welcome To</h2>
+                <p class="mt-4 text-lg md:text-2xl font-light">Website OSIS MPK SMA Al Azhar Syifa Budi Solo</p>
+                <div class="mt-8">
+                    <svg class="w-24 h-auto mx-auto" viewBox="0 0 109 13" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1C1 1 20.6 13 54.5 12C88.4 11 108 1 108 1" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bagian Tentang Kami -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Tentang Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Mengenal lebih dekat dengan OSIS MPK SMA Al Azhar Syifa
+                    Budi Solo.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Visi & Misi</h3>
+                    <p class="text-gray-600 mb-4">Menjadikan OSIS sebagai wadah aspirasi siswa yang kreatif, inovatif,
+                        dan berakhlak mulia serta mampu bersinergi untuk kemajuan sekolah.</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li>Meningkatkan keimanan dan ketaqwaan kepada Tuhan Yang Maha Esa.</li>
+                        <li>Mengembangkan bakat dan minat siswa di bidang akademik maupun non-akademik.</li>
+                        <li>Menjalin hubungan yang harmonis antar warga sekolah.</li>
+                        <li>Mengadakan kegiatan yang bersifat edukatif dan inspiratif.</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/16a34a/white?text=Foto+Pengurus+OSIS"
+                        alt="Foto Pengurus OSIS" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proker Unggulan -->
+    <section id="proker" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Program Kerja Unggulan</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Beberapa program kerja terbaik yang kami selenggarakan
+                    untuk kemajuan siswa.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card Proker 1 -->
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/400x250/34d399/ffffff?text=Pentas+Seni" alt="Pentas Seni"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Pentas Seni Tahunan</h3>
+                        <p class="text-gray-600 text-sm">Ajang kreativitas siswa dalam bidang seni musik, tari, dan
+                            teater yang diadakan setiap akhir tahun ajaran.</p>
+                    </div>
+                </div>
+                <!-- Card Proker 2 -->
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/400x250/fbbf24/ffffff?text=Bakti+Sosial" alt="Bakti Sosial"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Bakti Sosial Masyarakat</h3>
+                        <p class="text-gray-600 text-sm">Kegiatan sosial untuk membantu masyarakat sekitar yang
+                            membutuhkan, menumbuhkan rasa empati siswa.</p>
+                    </div>
+                </div>
+                <!-- Card Proker 3 -->
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/400x250/60a5fa/ffffff?text=LDKS" alt="LDKS"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Latihan Dasar Kepemimpinan</h3>
+                        <p class="text-gray-600 text-sm">Program pelatihan untuk mencetak calon-calon pemimpin masa
+                            depan yang tangguh dan bertanggung jawab.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisi -->
+    <section id="divisi" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Divisi OSIS MPK</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Kami bekerja dalam berbagai divisi untuk menjalankan
+                    program kerja yang efektif.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+                <!-- Divisi Item -->
+                <div class="p-4">
+                    <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-800">Keagamaan</h4>
+                </div>
+                <!-- Divisi Item -->
+                <div class="p-4">
+                    <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-800">Bela Negara</h4>
+                </div>
+                <!-- Divisi Item -->
+                <div class="p-4">
+                    <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-palette text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-800">Seni & Kreativitas</h4>
+                </div>
+                <!-- Divisi Item -->
+                <div class="p-4">
+                    <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-running text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-800">Olahraga</h4>
+                </div>
+                <!-- Divisi Item -->
+                <div class="p-4">
+                    <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bullhorn text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-800">Humas</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur AI Perencana Program Kerja -->
+    <section id="ai-planner" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Perencana Program Kerja AI ✨</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Butuh ide atau bantuan menyusun proposal? Masukkan tema
+                    program kerja Anda dan biarkan AI membantu!</p>
+            </div>
+
+            <div class="max-w-xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="text" id="program-idea-input" placeholder="Contoh: Class meeting akhir semester"
+                            class="flex-grow w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <button id="generate-plan-button"
+                            class="w-full sm:w-auto bg-green-600 text-white font-bold py-2 px-6 rounded-md hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                            <span id="button-text">Buat Rencana! ✨</span>
+                            <div id="button-spinner" class="spinner hidden ml-2"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hasil dari AI -->
+            <div id="ai-result-container" class="max-w-4xl mx-auto mt-10"></div>
+            <!-- Pesan Error -->
+            <div id="error-message"
+                class="hidden max-w-xl mx-auto mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg"
+                role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline">Terjadi kesalahan. Coba lagi nanti.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri -->
+    <section id="galeri" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Galeri Kegiatan</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Momen-momen terbaik dari berbagai kegiatan yang telah
+                    kami laksanakan.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid gap-4">
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x300/f87171/ffffff?text=Kegiatan+1" alt=""></div>
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x500/fb923c/ffffff?text=Kegiatan+2" alt=""></div>
+                </div>
+                <div class="grid gap-4">
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x500/facc15/ffffff?text=Kegiatan+3" alt=""></div>
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x300/4ade80/ffffff?text=Kegiatan+4" alt=""></div>
+                </div>
+                <div class="grid gap-4">
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x300/34d399/ffffff?text=Kegiatan+5" alt=""></div>
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x500/22d3ee/ffffff?text=Kegiatan+6" alt=""></div>
+                </div>
+                <div class="grid gap-4">
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x500/818cf8/ffffff?text=Kegiatan+7" alt=""></div>
+                    <div><img class="h-auto max-w-full rounded-lg shadow-md"
+                            src="https://placehold.co/500x300/c084fc/ffffff?text=Kegiatan+8" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alumni -->
+    <section id="alumni" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Jejak Alumni</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Kisah inspiratif dari para alumni yang telah sukses di
+                    bidangnya.</p>
+            </div>
+            <div
+                class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row items-center gap-8">
+                <img class="w-24 h-24 rounded-full mx-auto md:mx-0"
+                    src="https://placehold.co/100x100/3b82f6/ffffff?text=Alumni" alt="Foto Alumni">
+                <div class="text-center md:text-left">
+                    <p class="text-gray-600 italic">"OSIS mengajarkan saya banyak hal tentang kepemimpinan, kerja tim,
+                        dan tanggung jawab. Pengalaman ini sangat berharga dan menjadi fondasi kesuksesan saya saat
+                        ini."</p>
+                    <h4 class="font-bold text-lg text-gray-800 mt-4">Andi Pratama</h4>
+                    <p class="text-sm text-gray-500">CEO & Founder TechStart, Alumni 2015</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Hubungi Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-2">Punya pertanyaan atau saran? Jangan ragu untuk
+                    menghubungi kami.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-10">
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Kontak</h3>
+                    <p class="flex items-center text-gray-600 mb-3"><i
+                            class="fas fa-map-marker-alt w-6 text-green-600"></i> Jl. Blulukan II, Blulukan, Colomadu,
+                        Karanganyar</p>
+                    <p class="flex items-center text-gray-600 mb-3"><i class="fas fa-phone w-6 text-green-600"></i>
+                        (0271) 7889998</p>
+                    <p class="flex items-center text-gray-600 mb-3"><i class="fas fa-envelope w-6 text-green-600"></i>
+                        info.sma@al-azhar.sch.id</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-500 hover:text-green-600"><i
+                                class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-green-600"><i class="fab fa-youtube fa-2x"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-green-600"><i class="fab fa-facebook fa-2x"></i></a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <form action="#" method="POST" class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nama</label>
+                            <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-md"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Pesan</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border rounded-md"
+                                required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700">Kirim
+                            Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 OSIS MPK SMA Al Azhar Syifa Budi Solo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- LOGIC UNTUK MENU MOBILE ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Tutup menu saat link mobile diklik
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- LOGIC UNTUK FITUR GEMINI AI ---
+        const generateButton = document.getElementById('generate-plan-button');
+        const buttonText = document.getElementById('button-text');
+        const buttonSpinner = document.getElementById('button-spinner');
+        const ideaInput = document.getElementById('program-idea-input');
+        const resultContainer = document.getElementById('ai-result-container');
+        const errorMessage = document.getElementById('error-message');
+
+        generateButton.addEventListener('click', async () => {
+            const prompt = ideaInput.value;
+            if (!prompt) {
+                alert("Harap masukkan ide program kerja terlebih dahulu.");
+                return;
+            }
+
+            // Tampilkan state loading
+            buttonText.classList.add('hidden');
+            buttonSpinner.classList.remove('hidden');
+            generateButton.disabled = true;
+            resultContainer.innerHTML = '';
+            errorMessage.classList.add('hidden');
+
+            try {
+                // Definisikan payload untuk Gemini API
+                const chatHistory = [{
+                    role: "user",
+                    parts: [{
+                        text: `Anda adalah seorang ahli perencana acara yang sangat kreatif dan berpengalaman dalam organisasi siswa (OSIS) di Indonesia. Buatkan sebuah proposal rencana detail untuk program kerja OSIS dengan tema: "${prompt}".
+
+                        Berikan respons dalam format JSON yang terstruktur. Pastikan semua nama properti JSON dalam bahasa Inggris (camelCase) dan semua nilainya dalam bahasa Indonesia.
+
+                        Struktur JSON harus sebagai berikut:
+                        {
+                          "namaProgram": "Nama program yang menarik dan kreatif.",
+                          "slogan": "Slogan atau tagline yang mudah diingat untuk acara tersebut.",
+                          "tujuan": ["Tujuan utama acara, minimal 3 poin dalam bentuk array of strings."],
+                          "sasaran": "Siapa target peserta dari acara ini (misalnya: 'Seluruh siswa kelas X-XII').",
+                          "rundownAcara": [
+                            {"waktu": "Waktu acara (misal: '08:00 - 09:00 WIB')", "kegiatan": "Deskripsi kegiatan pada waktu tersebut."},
+                            {"waktu": "09:00 - 10:00 WIB", "kegiatan": "Kegiatan selanjutnya"}
+                          ],
+                          "estimasiAnggaran": [
+                            {"item": "Nama item pengeluaran", "biaya": "Estimasi biaya dalam Rupiah (misal: 'Rp 500.000')"},
+                            {"item": "Item lain", "biaya": "Rp 300.000"}
+                          ]
+                        }`
+                    }]
+                }];
+
+                const payload = {
+                    contents: chatHistory,
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                    }
+                };
+
+                const apiKey = ""; // Kunci API akan disediakan oleh lingkungan Canvas
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                // Panggil Gemini API
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                // Cek struktur respons dan render hasilnya
+                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                    const plan = JSON.parse(result.candidates[0].content.parts[0].text);
+                    displayPlan(plan);
+                } else {
+                    throw new Error("Struktur respons dari API tidak valid.");
+                }
+
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Kembalikan state tombol ke normal
+                buttonText.classList.remove('hidden');
+                buttonSpinner.classList.add('hidden');
+                generateButton.disabled = false;
+            }
+        });
+
+        // Fungsi untuk menampilkan hasil rencana ke dalam HTML
+        function displayPlan(plan) {
+            const { namaProgram, slogan, tujuan, sasaran, rundownAcara, estimasiAnggaran } = plan;
+
+            const rundownHtml = rundownAcara.map(item => `
+                <li class="flex py-2 border-b last:border-b-0">
+                    <span class="w-1/3 text-gray-500 font-mono text-sm">${item.waktu}</span>
+                    <span class="w-2/3 text-gray-800">${item.kegiatan}</span>
+                </li>
+            `).join('');
+
+            const anggaranHtml = estimasiAnggaran.map(item => `
+                 <li class="flex justify-between py-2 border-b last:border-b-0">
+                    <span class="text-gray-800">${item.item}</span>
+                    <span class="text-gray-600 font-medium">${item.biaya}</span>
+                </li>
+            `).join('');
+
+            const resultHtml = `
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 animate-fade-in">
+                    <h3 class="text-2xl font-bold text-center text-green-700">${namaProgram}</h3>
+                    <p class="text-center text-gray-500 italic mt-1">"${slogan}"</p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <h4 class="font-bold text-lg mb-3 text-gray-800"><i class="fas fa-bullseye mr-2 text-green-600"></i>Tujuan Program</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                ${tujuan.map(t => `<li>${t}</li>`).join('')}
+                            </ul>
+                            <h4 class="font-bold text-lg mt-6 mb-3 text-gray-800"><i class="fas fa-users mr-2 text-green-600"></i>Sasaran Peserta</h4>
+                            <p class="text-gray-700">${sasaran}</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-3 text-gray-800"><i class="fas fa-wallet mr-2 text-green-600"></i>Estimasi Anggaran</h4>
+                            <ul class="space-y-1">${anggaranHtml}</ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold text-lg mb-3 text-gray-800"><i class="fas fa-clock mr-2 text-green-600"></i>Rundown Acara</h4>
+                        <ul>${rundownHtml}</ul>
+                    </div>
+                </div>
+            `;
+            resultContainer.innerHTML = resultHtml;
+        }
+
+    </script>
+</body>
+
+</html>
