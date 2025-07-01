@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Bolak-Balik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Container untuk menjaga perspektif 3D */
+        .card-container {
+            perspective: 1000px;
+        }
+
+        /* Kartu utama yang akan melakukan transisi flip */
+        .card {
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+            aspect-ratio: 2233 / 3556;
+            /* Menetapkan rasio aspek yang diminta */
+        }
+
+        /* Kelas yang ditambahkan via JS untuk membalik kartu */
+        .is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Pengaturan untuk kedua sisi kartu (depan dan belakang) */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            /* Safari */
+            backface-visibility: hidden;
+            overflow: hidden;
+            /* Memastikan gambar tidak keluar dari sudut rounded */
+        }
+
+        /* Sisi belakang diputar 180 derajat secara default */
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-xs mx-auto">
+        <!-- Judul -->
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-900">Kartu Keren</h1>
+        <!-- Card Container -->
+        <div class="card-container cursor-pointer group" id="card-container">
+            <div class="card w-full rounded-2xl shadow-xl" id="card">
+                <!-- Sisi Depan Kartu -->
+                <div class="card-face card-front bg-white border border-gray-200 rounded-2xl">
+                    <img id="front-image" src="https://placehold.co/447x711/FFFFFF/1F2937?text=Sisi+Depan"
+                        alt="Foto depan" class="w-full h-full object-cover">
+                </div>
+                <!-- Sisi Belakang Kartu -->
+                <div class="card-face card-back bg-gray-50 border border-gray-200 rounded-2xl">
+                    <img id="back-image" src="https://placehold.co/447x711/F9FAFB/1F2937?text=Sisi+Belakang"
+                        alt="Foto belakang" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Bio dan Media Sosial -->
+        <div class="text-center mt-6 px-2">
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Ini adalah tempat untuk bio singkat Anda. Anda bisa menulis tentang diri Anda, hobi, atau apa pun yang
+                ingin Anda bagikan di sini.
+            </p>
+            <!-- Tombol Instagram Terpadu dengan Hover Gradien -->
+            <div class="flex justify-center mt-5">
+                <a href="https://www.instagram.com/username" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-start w-full space-x-3 bg-white text-gray-800 font-semibold py-2 px-5 rounded-lg shadow-md transform transition-all duration-300 border border-gray-300 hover:text-white hover:bg-gradient-to-br from-purple-600 via-pink-500 to-yellow-400 hover:shadow-lg hover:-translate-y-px">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12 2c-4.043 0-4.57.018-6.17.09c-1.6.072-2.704.363-3.645 1.304C1.556 4.337.822 6.136.75 7.736c-.072 1.6-.09 2.127-.09 6.17s.018 4.57.09 6.17c.072 1.6.363 2.703 1.304 3.645c.94.94 2.127 1.232 3.727 1.304c1.6.072 2.127.09 6.17.09s4.57-.018 6.17-.09c1.6-.072 2.703-.363 3.645-1.304c.94-.94 1.232-2.127 1.304-3.727c.072-1.6.09-2.127.09-6.17s-.018-4.57-.09-6.17c-.072-1.6-.363-2.703-1.304-3.645C20.663 2.455 18.864.822 17.264.75c-1.6-.072-2.127-.09-6.17-.09zm0 2.163c3.957 0 4.44.016 6.01.087c1.373.062 2.21.34 2.883 1.013c.673.673.95 1.51 1.013 2.883c.07 1.57.087 2.053.087 6.01s-.016 4.44-.087 6.01c-.062 1.373-.34 2.21-1.013 2.883c-.673-.673-1.51.95-2.883 1.013c-1.57.07-2.053.087-6.01.087s-4.44-.016-6.01-.087c-1.373-.062-2.21-.34-2.883-1.013c-.673-.673-.95-1.51-1.013-2.883c-.07-1.57-.087-2.053-.087-6.01s.016-4.44.087-6.01c.062-1.373.34-2.21 1.013-2.883c.673-.673 1.51-.95 2.883-1.013c1.57-.07 2.053-.087 6.01-.087zM12 7.167c-2.66 0-4.833 2.173-4.833 4.833s2.173 4.833 4.833 4.833s4.833-2.173 4.833-4.833s-2.173-4.833-4.833-4.833zm0 7.833c-1.657 0-3-1.343-3-3s1.343-3 3-3s3 1.343 3 3s-1.343 3-3 3zm6.417-8.416a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>@username</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Kontrol untuk Upload Gambar -->
+        <div class="mt-8 text-center">
+            <p class="text-gray-500 mb-4 text-sm">Klik kartu untuk membalik atau unggah gambar Anda.</p>
+            <div class="flex justify-between w-full">
+                <div>
+                    <label for="front-upload"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-colors duration-300">
+                        Unggah Depan
+                    </label>
+                    <input type="file" id="front-upload" class="hidden" accept="image/*">
+                </div>
+                <div>
+                    <label for="back-upload"
+                        class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-colors duration-300">
+                        Unggah Belakang
+                    </label>
+                    <input type="file" id="back-upload" class="hidden" accept="image/*">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('card');
+            const cardContainer = document.getElementById('card-container');
+
+            const frontUpload = document.getElementById('front-upload');
+            const backUpload = document.getElementById('back-upload');
+            const frontImage = document.getElementById('front-image');
+            const backImage = document.getElementById('back-image');
+
+            // Event listener untuk membalik kartu saat diklik
+            cardContainer.addEventListener('click', () => {
+                card.classList.toggle('is-flipped');
+            });
+
+            // Fungsi untuk menangani upload file dan menampilkan preview
+            function handleImageUpload(event, imageElement) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imageElement.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            // Event listener untuk input file sisi depan
+            frontUpload.addEventListener('change', (event) => {
+                handleImageUpload(event, frontImage);
+            });
+
+            // Event listener untuk input file sisi belakang
+            backUpload.addEventListener('change', (event) => {
+                handleImageUpload(event, backImage);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
