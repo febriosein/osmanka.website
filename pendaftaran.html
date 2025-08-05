@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- [SEO] Judul halaman yang dioptimalkan -->
+    <title>OSIS MAN Kaur | Website Resmi | Madrasah Aliyah Negeri Kaur</title>
+
+    <!-- [SEO] Meta tags untuk deskripsi, keywords, dan author -->
+    <meta name="description"
+        content="Website resmi OSIS MAN Kaur (OSMANKA). Temukan informasi terbaru tentang program kerja, divisi, galeri kegiatan, dan berita seputar Organisasi Siswa Intra Sekolah di Madrasah Aliyah Negeri Kaur.">
+    <meta name="keywords"
+        content="OSIS MAN Kaur, osmanka, Man kaur, Madrasah Aliyah Negeri Kaur, OSIS, kegiatan siswa, program kerja OSIS, website OSIS MAN Kaur">
+    <meta name="author" content="OSIS MAN Kaur">
+
+    <!-- [SEO] Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.osmanka.site/"> <!-- Ganti dengan URL asli website Anda -->
+    <meta property="og:title" content="OSIS MAN Kaur | Website Resmi | Madrasah Aliyah Negeri Kaur">
+    <meta property="og:description"
+        content="Website resmi OSIS MAN Kaur (OSMANKA). Temukan informasi terbaru tentang program kerja, divisi, dan kegiatan kami.">
+    <meta property="og:image" content="https://placehold.co/1200x630/16a34a/ffffff?text=OSMANKA">
+    <!-- Ganti dengan URL gambar unggulan -->
+
+    <!-- [SEO] Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.osmanka.site/"> <!-- Ganti dengan URL asli website Anda -->
+    <meta property="twitter:title" content="OSIS MAN Kaur | Website Resmi | Madrasah Aliyah Negeri Kaur">
+    <meta property="twitter:description"
+        content="Website resmi OSIS MAN Kaur (OSMANKA). Temukan informasi terbaru tentang program kerja, divisi, dan kegiatan kami.">
+    <meta property="twitter:image" content="https://placehold.co/1200x630/16a34a/ffffff?text=OSMANKA">
+    <!-- Ganti dengan URL gambar unggulan -->
+
+    <!-- Impor Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Impor Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Impor ikon Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* [PENINGKATAN] Menambahkan variabel warna untuk konsistensi */
+        :root {
+            --primary-color: #16a34a;
+            /* green-600 */
+            --primary-hover: #15803d;
+            /* green-700 */
+        }
+
+        /* [PENINGKATAN] Scroll behavior dan padding untuk header sticky */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+            /* Sesuaikan dengan tinggi header */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            /* bg-slate-50 */
+        }
+
+        /* [PENINGKATAN UX] Style untuk link navigasi aktif */
+        .active-nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .active-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        /* [PENINGKATAN] Style dropdown yang lebih halus */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            z-index: 50;
+        }
+
+        /* [PENINGKATAN] Animasi yang lebih modern */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoom-in {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.5s ease-out forwards;
+        }
+
+        /* [PENINGKATAN] Animasi scroll yang lebih baik */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* [PENINGKATAN] Style Modal yang lebih baik */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-content {
+            transition: transform 0.3s ease;
+            animation: zoom-in 0.3s ease-out;
+        }
+
+        /* [PENINGKATAN UX] Tombol kembali ke atas */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            /* Awalnya disembunyikan */
+            place-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        #back-to-top.show {
+            display: grid;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-gray-700">
+
+    <!-- Header dan Navigasi -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3">
+                    <img src="image/logoosmanka.jpg" alt="Logo OSIS MAN Kaur" class="h-12 w-12 rounded-full">
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">OSIS MAN KAUR</h1>
+                        <p class="text-xs text-gray-500">Masa Bakti 2024/2025</p>
+                    </div>
+                </a>
+
+                <!-- Navigasi Desktop -->
+                <nav id="desktop-nav" class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#home"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Home</a>
+                    <a href="index.html#tentang"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Tentang</a>
+                    <a href="index.html#proker"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Program</a>
+                    <a href="index.html#divisi"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Divisi</a>
+                    <a href="index.html#galeri"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Galeri</a>
+                    <a href="index.html#contact"
+                        class="nav-link text-gray-600 hover:text-green-600 font-medium transition duration-300">Kontak</a>
+                </nav>
+
+                <!-- Tombol Menu Mobile -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-green-600 focus:outline-none"
+                        aria-label="Buka menu">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Navigasi Mobile (tersembunyi) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html#home" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Home</a>
+            <a href="index.html#tentang" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Tentang</a>
+            <a href="index.html#proker" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Program</a>
+            <a href="index.html#divisi" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Divisi</a>
+            <a href="index.html#galeri" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Galeri</a>
+            <a href="index.html#contact" class="mobile-nav-link block py-3 px-6 text-sm text-gray-600 hover:bg-green-50 rounded">Kontak</a>
+        </div>
+    </header>
+
+    <!-- Konten Utama dengan Iframe di Tengah -->
+    <main class="flex items-center justify-center py-4 px-2" style="min-height: calc(100vh - 140px);">
+        <iframe class="w-full max-w-2xl rounded-lg shadow-xl border border-gray-200" style="height: 75vh;"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfmaPoJT93vFtBu7MEn0DPXLLlnrVXlYt423uTiuBOtPcJ1HQ/viewform?embedded=true"
+            frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; <span id="current-year"></span> OSIS Madrasah Aliyah Negeri Kaur. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">Didesain dan Dikembangkan oleh Tim IT Kreativitas OSMANKA</p>
+        </div>
+    </footer>
+
+    <!-- [PENINGKATAN UX] Modal untuk Divisi -->
+    <div id="division-modal"
+        class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 invisible opacity-0">
+        <div id="modal-content"
+            class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto">
+            <div class="relative">
+                <img id="modal-image" src="" alt="Gambar representasi divisi"
+                    class="w-full h-56 object-cover rounded-t-lg">
+                <button id="modal-close-button"
+                    class="absolute top-3 right-3 bg-white/80 rounded-full w-8 h-8 flex items-center justify-center text-gray-700 hover:bg-gray-200 transition"
+                    aria-label="Tutup modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 md:p-8">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+                <p id="modal-description" class="text-gray-600"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- [PENINGKATAN UX] Tombol Kembali ke Atas -->
+    <button id="back-to-top" class="grid" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- LOGIC UNTUK MENU MOBILE ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuButton.querySelector('i');
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                menuIcon.className = isHidden ? 'fas fa-bars fa-lg' : 'fas fa-times fa-lg';
+            });
+
+            // --- [PERBAIKAN] LOGIC UNTUK SCROLLING NAVIGASI YANG LEBIH AKURAT ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+
+                    // Jika link adalah untuk navigasi halaman ini
+                    if (href.startsWith('#')) {
+                        const targetElement = document.querySelector(href);
+                        if (!targetElement) return;
+
+                        e.preventDefault();
+
+                        const header = document.querySelector('header');
+                        const headerHeight = header ? header.offsetHeight : 0;
+
+                        const targetPosition = href === '#home'
+                            ? 0
+                            : targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Tutup menu mobile jika terbuka dan link yang diklik adalah link mobile
+                        if (this.classList.contains('mobile-nav-link') && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            menuIcon.className = 'fas fa-bars fa-lg';
+                        }
+                    }
+                });
+            });
+
+
+            // --- [PENINGKATAN UX] LOGIC UNTUK NAVIGASI AKTIF SAAT SCROLL ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (sections.length > 0 && navLinks.length > 0) {
+                const observerOptions = { rootMargin: '-50% 0px -50% 0px' };
+
+                const sectionObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const activeId = entry.target.id;
+                            navLinks.forEach(link => {
+                                link.classList.toggle('active-nav-link', link.hash === `#${activeId}`);
+                            });
+                        }
+                    });
+                }, observerOptions);
+
+                sections.forEach(section => {
+                    sectionObserver.observe(section);
+                });
+            }
+
+
+            // --- LOGIC UNTUK MODAL DIVISI ---
+            const divisionItems = document.querySelectorAll('.division-item');
+            const modal = document.getElementById('division-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModalButton = document.getElementById('modal-close-button');
+
+            const openModal = (title, image, description) => {
+                if (!modal) return;
+                modalImage.src = image;
+                modalImage.alt = `Gambar representasi untuk ${title}`;
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                modal.classList.remove('invisible', 'opacity-0');
+                document.body.style.overflow = 'hidden';
+            }
+
+            const closeModal = () => {
+                if (!modal) return;
+                modal.classList.add('invisible', 'opacity-0');
+                document.body.style.overflow = 'auto';
+            }
+
+            if (modal) {
+                divisionItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openModal(item.dataset.title, item.dataset.image, item.dataset.description);
+                    });
+                });
+
+                closeModalButton.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+            }
+
+            // --- [PENINGKATAN] LOGIC UNTUK ANIMASI SAAT SCROLL ---
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            if (scrollElements.length > 0) {
+                const scrollObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                scrollElements.forEach(el => scrollObserver.observe(el));
+            }
+
+
+            // --- [PENINGKATAN UX] LOGIC TOMBOL KEMBALI KE ATAS ---
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('show');
+                    } else {
+                        backToTopButton.classList.remove('show');
+                    }
+                });
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // --- [PENINGKATAN] SET TAHUN OTOMATIS DI FOOTER ---
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+
+</html>
